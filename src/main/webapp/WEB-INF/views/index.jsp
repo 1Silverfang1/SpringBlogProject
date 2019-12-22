@@ -1,19 +1,33 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: root
-  Date: 20/12/19
-  Time: 11:16 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="SpringMVC.Model.BlogModel" %>
+<%@ page import="org.springframework.web.servlet.ModelAndView" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
-  <head>
+<head>
     <title>This is your new homepage</title>
-  </head>
-  <body>
-  Hey This thing works
-   <a href="formPage">This is Form page Link</a>
-  <hr>
-  <a href="student/showForm">This is the Student Form Link Page</a>
-  </body>
+</head>
+<body>
+Hey This is your HomePage
+All the Form Submitted data will be shown here.
+<a href="">Click here for Homepage</a>
+<hr>
+<hr>
+<%
+    ArrayList<BlogModel> result= (ArrayList<BlogModel>) request.getAttribute("BlogData");
+    for(BlogModel curBlog: result)
+    {
+%>
+<h1><%=curBlog.getAuthorName()%></h1>
+<p><%=curBlog.getBlogPost()%></p>
+<hr>
+<%
+    }
+%>
+<%--    <c:forEach items="${BlogData}" var="BlogData">--%>
+<%--        ${BlogData}--%>
+<%--    </c:forEach>--%>
+<br>
+<a href="post/create">Click here to add Form</a>
+</body>
 </html>
