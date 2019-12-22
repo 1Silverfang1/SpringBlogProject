@@ -19,9 +19,23 @@ All the Form Submitted data will be shown here.
     for(BlogModel curBlog: result)
     {
 %>
-<h1><%=curBlog.getBlogPost()%></h1>
+<form method="post" action="post/view">
+<h2><input style="background: none;border: none;font-size: larger;cursor: pointer" type="submit" value="<%=curBlog.getBlogTitle()%>"></h2>
+    <input type="hidden" value="<%=curBlog.getId()%>" name="BlogId">
+</form>
 <h3><%=curBlog.getAuthorName()%></h3>
-<p><%=curBlog.getBlogPost()%></p>
+<% String blog = curBlog.getBlogPost();
+String blogExcrept="";
+if(blog.length()>50)
+{
+   blogExcrept = blog.substring(0,150);
+}
+else
+{
+    blogExcrept=blog;
+}
+%>
+<p><%=blogExcrept%></p>
 <form action="post/delete" method="post">
     <input type="hidden" value="<%=curBlog.getId()%>" name="BlogId">
     <input type="submit" value="Delete">

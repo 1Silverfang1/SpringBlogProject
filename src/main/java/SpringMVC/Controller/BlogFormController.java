@@ -82,4 +82,15 @@ public class BlogFormController {
         modelAndView.setViewName("DataSucess");
         return modelAndView;
     }
+    @RequestMapping(value = "/view",method = RequestMethod.POST)
+    public ModelAndView showMyblog(HttpServletRequest request)
+    {
+        int id = Integer.parseInt(request.getParameter("BlogId"));
+        RetrieveSingleBlog retrieveSingleBlog= new RetrieveSingleBlog();
+        BlogModel blogModel=retrieveSingleBlog.getMyBlog(id);
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("ViewBlog",blogModel);
+        modelAndView.setViewName("DisplayBlog");
+        return modelAndView;
+    }
 }
