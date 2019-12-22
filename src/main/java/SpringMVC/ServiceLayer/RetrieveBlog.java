@@ -14,7 +14,6 @@ import java.util.List;
 public class RetrieveBlog {
     public List<BlogModel> getBlogData()
     {
-        BlogModel blogModel=null;
         Configuration configuration= new Configuration().configure().addAnnotatedClass(BlogModel.class);
         SessionFactory sessionFactory= configuration.buildSessionFactory();
         Session session= sessionFactory.openSession();

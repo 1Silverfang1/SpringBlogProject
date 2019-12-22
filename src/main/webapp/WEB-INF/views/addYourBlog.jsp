@@ -11,25 +11,27 @@
     </style>
 </head>
 <body>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+%>
 <span>
     ${processResult}
 </span>
-<form:form action="/SpringMVCBlog_war_exploded/post/create" modelAttribute="BlogModel" method="post" >
-    First Name: <form:input path="authorName" autocomplete="false"/>
+<form:form action="/SpringMVCBlog_war_exploded/post/create" modelAttribute="BlogModel" method="post" autocomplete="off">
+    Author Name: <form:input path="authorName" autocomplete="false"/>
     <form:errors path="authorName" /> <br>
-    Last Name: <form:input path="blogTitle" autocomplete="false"/>
+    Blog Title: <form:input path="blogTitle" autocomplete="false"/>
     <form:errors path="blogTitle" /><br>
-    Student Id: <form:input path="id" autocomplete="false"/>
-    <form:errors path="id" /><br>
-    Country: 
+    Choose Your Country
     <form:select path="country">
         <form:option value="INDIA" label="IN"></form:option>
         <form:option value="PAKISTAN" label="PK"></form:option>
         <form:option value="GERMANY" label="GM"></form:option>
         <form:option value="UNITED STATES" label="USA"></form:option>
     </form:select>
+    Create Your Blog
 <form:textarea path="blogPost" ></form:textarea>
-<input type="submit" value="Submit">
+<input type="submit" value="Publish">
 </form:form>
 </body>
 </html>

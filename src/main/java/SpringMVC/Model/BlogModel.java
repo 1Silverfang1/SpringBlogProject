@@ -6,18 +6,20 @@ import javax.persistence.*;
 //@Table(name = "BlogPost", schema = "public", catalog = "frenzy")
 public class BlogModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
     private String authorName;
     private String blogTitle;
     private String Country;
+
+    public void setId(int id) {
+        Id = id;
+    }
+
     private String blogPost;
 
     public int getId() {
         return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
     }
 
     public String getAuthorName() {
