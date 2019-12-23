@@ -2,13 +2,13 @@ package SpringMVC.Controller;
 
 import SpringMVC.Model.BlogModel;
 import SpringMVC.ServiceLayer.*;
+import SpringMVC.ServiceLayer.Interface.RetrieveInterface;
+import SpringMVC.ServiceLayer.Interface.UpdateBlogInterface;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -43,7 +43,7 @@ public class BlogFormController {
         System.out.println(blogId+"sdvvvvvvvv");
         ModelAndView modelAndView= new ModelAndView();
         modelAndView.setViewName("DeleteBlog");
-        RetrieveSingleBlog retrieveSingleBlog = new RetrieveSingleBlog();
+        RetrieveInterface retrieveSingleBlog = new RetrieveBlog();
         modelAndView.addObject("BlogObject",retrieveSingleBlog.getMyBlog(Integer.parseInt(blogId)));
         return  modelAndView;
     }
@@ -63,7 +63,7 @@ public class BlogFormController {
     public ModelAndView updateBlog(@PathVariable("BlogId") String id)
     {
         int blogId = Integer.parseInt(id);
-        RetrieveSingleBlog retrieveSingleBlog = new RetrieveSingleBlog();
+        RetrieveInterface retrieveSingleBlog = new RetrieveBlog();
         ModelAndView modelAndView= new ModelAndView();
         modelAndView.addObject("BlogObject",retrieveSingleBlog.getMyBlog(blogId));
 //        System.out.println(request.getParameter("BlogId")+"svd");
@@ -76,9 +76,9 @@ public class BlogFormController {
     {
         System.out.println(blogModel);
         ModelAndView modelAndView= new ModelAndView();
-        UpdateBlog updateBlog= new UpdateBlog();
+        UpdateBlogInterface updateBlog= new UpdateBlog();
         updateBlog.updateMyblog(blogModel);
-        RetrieveBlog retrieveBlog= new RetrieveBlog();
+        RetrieveInterface retrieveBlog= new RetrieveBlog();
         modelAndView.addObject("BlogData",retrieveBlog.getBlogData());
         modelAndView.setViewName("DataSucess");
         return modelAndView;
@@ -87,7 +87,7 @@ public class BlogFormController {
     public ModelAndView showMyblog(@PathVariable("BlogId") String id)
     {
         int blogid = Integer.parseInt(id);
-        RetrieveSingleBlog retrieveSingleBlog= new RetrieveSingleBlog();
+        RetrieveInterface retrieveSingleBlog= new RetrieveBlog();
         BlogModel blogModel=retrieveSingleBlog.getMyBlog(blogid);
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.addObject("ViewBlog",blogModel);

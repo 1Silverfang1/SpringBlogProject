@@ -1,12 +1,16 @@
 package SpringMVC.ServiceLayer;
 
 import SpringMVC.Model.BlogModel;
+import SpringMVC.ServiceLayer.Interface.UpdateBlogInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Component;
 
-public class UpdateBlog {
+@Component
+public class UpdateBlog implements UpdateBlogInterface {
+    @Override
 public String updateMyblog(BlogModel myBlog)
 {
     Configuration configuration= new Configuration().configure().addAnnotatedClass(BlogModel.class);

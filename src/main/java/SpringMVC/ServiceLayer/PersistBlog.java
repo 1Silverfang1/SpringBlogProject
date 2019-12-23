@@ -1,13 +1,16 @@
 package SpringMVC.ServiceLayer;
 
 import SpringMVC.Model.BlogModel;
+import SpringMVC.ServiceLayer.Interface.SaveBlogInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Component;
 
-
-public class PersistBlog {
+@Component
+public class PersistBlog implements SaveBlogInterface {
+    @Override
     public String addThis(BlogModel blogModel)
     {
         Configuration configuration= new Configuration().configure().addAnnotatedClass(BlogModel.class);

@@ -5,8 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Component;
 
-public class DeleteBlog {
+@Component
+public class DeleteBlog implements SpringMVC.ServiceLayer.Interface.DeleteBlog {
+    @Override
     public String deleteBlog(int blogId)
     {
         Configuration configuration= new Configuration().configure().addAnnotatedClass(BlogModel.class);
