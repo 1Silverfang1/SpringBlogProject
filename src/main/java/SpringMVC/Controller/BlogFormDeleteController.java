@@ -3,6 +3,7 @@ package SpringMVC.Controller;
 import SpringMVC.ServiceLayer.DeleteBlog;
 import SpringMVC.ServiceLayer.RetrieveSingleBlog;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,9 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/post")
 public class BlogFormDeleteController {
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
-    public ModelAndView deletedBlog(@RequestParam("BlogId") String blogId)
+    @RequestMapping(value = "/delete/{BlogId}",method = RequestMethod.GET)
+    public ModelAndView deletedBlog(@PathVariable("BlogId") String blogId)
     {
+        System.out.println(blogId+"sdvvvvvvvv");
         ModelAndView modelAndView= new ModelAndView();
         modelAndView.setViewName("DeleteBlog");
         RetrieveSingleBlog retrieveSingleBlog = new RetrieveSingleBlog();

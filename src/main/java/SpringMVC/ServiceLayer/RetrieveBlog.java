@@ -20,7 +20,6 @@ public class RetrieveBlog {
         Transaction transaction= session.beginTransaction();
         Query resultQuery=session.createQuery("from BlogModel");
         List<BlogModel> blogModelArrayList= resultQuery.list();
-
         return  blogModelArrayList;
     }
 }

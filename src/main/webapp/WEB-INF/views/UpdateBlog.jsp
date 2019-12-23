@@ -15,12 +15,11 @@
 </head>
 <body>
  <h2>Update your Blog Here</h2>
-<form:form action="updateConfirm" modelAttribute="BlogObject" method="post" autocomplete="false">
+<form:form action="/SpringMVCBlog_war_exploded/post/updateConfirm" modelAttribute="BlogObject" method="post" >
 <form:input path="authorName"></form:input>
     <form:input path="blogTitle"></form:input>
     <form:input path="blogPost"></form:input>
-<%--    <input:hidden path="id" name="abc"/>--%>
-    <form:hidden path="id"/>
+    <form:hidden path="id"></form:hidden>
     <form:hidden path="country"/>
      <input type="submit" value="update">
  </form:form>

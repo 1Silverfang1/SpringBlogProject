@@ -13,16 +13,18 @@ Hey This is your HomePage
 All the Form Submitted data will be shown here.
 <a href="">Click here for Homepage</a>
 <hr>
+<a href="post/create">Click here to add Form</a>
 <hr>
 <%
     ArrayList<BlogModel> result= (ArrayList<BlogModel>) request.getAttribute("BlogData");
     for(BlogModel curBlog: result)
     {
 %>
-<form method="post" action="post/view">
-<h2><input style="text-align:center;background: none;border: none;font-size: larger;cursor: pointer" type="submit" value="<%=curBlog.getBlogTitle()%>"></h2>
-    <input type="hidden" value="<%=curBlog.getId()%>" name="BlogId">
-</form>
+<%--<form method="get" action="post/view">--%>
+<%--<h2><input style="text-align:center;background: none;border: none;font-size: larger;cursor: pointer" type="submit" value="<%=curBlog.getBlogTitle()%>"></h2>--%>
+<%--    <input type="hidden" value="<%=curBlog.getId()%>" name="BlogId">--%>
+<%--</form>--%>
+<h2><a href="post/view/<%=curBlog.getId()%>"><%=curBlog.getAuthorName()%></a></h2>
 <h3><%=curBlog.getAuthorName()%></h3>
 <% String blog = curBlog.getBlogPost();
 String blogExcrept="";
@@ -36,12 +38,12 @@ else
 }
 %>
 <p><%=blogExcrept%></p>
-<form action="post/delete" method="post">
-    <input type="hidden" value="<%=curBlog.getId()%>" name="BlogId">
+<form action="post/delete/<%=curBlog.getId()%>"  method="get">
+<%--    <input type="hidden" value="<%=curBlog.getId()%>" name="BlogId">--%>
     <input type="submit" value="Delete">
 </form>
-<form action="post/update" method="post">
-    <input type="hidden" value="<%=curBlog.getId()%>" name="BlogId">
+<form action="post/update/<%=curBlog.getId()%>" method="get">
+<%--    <input type="hidden" value="<%=curBlog.getId()%>" name="BlogId">--%>
     <input type="submit" value="Edit">
 </form>
 <hr>
@@ -50,6 +52,6 @@ else
 %>
 
 <br>
-<a href="post/create">Click here to add Form</a>
+
 </body>
 </html>
