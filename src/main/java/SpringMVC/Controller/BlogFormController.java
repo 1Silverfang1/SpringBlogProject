@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/post")
-public class BlogFormCreateController {
+public class BlogFormController {
     @RequestMapping(value = "/create",method = RequestMethod.GET)
     public String BlogAddForm(Model model)
     {

@@ -1,6 +1,7 @@
 <%@ page import="SpringMVC.Model.BlogModel" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="textarea" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: root
@@ -18,7 +19,8 @@
 <form:form action="/SpringMVCBlog_war_exploded/post/updateConfirm" modelAttribute="BlogObject" method="post" >
 <form:input path="authorName"></form:input>
     <form:input path="blogTitle"></form:input>
-    <form:input path="blogPost"></form:input>
+<%--    <form:input path="blogPost"></form:input>--%>
+    <form:textarea path="blogPost"/>
     <form:hidden path="id"></form:hidden>
     <form:hidden path="country"/>
      <input type="submit" value="update">
