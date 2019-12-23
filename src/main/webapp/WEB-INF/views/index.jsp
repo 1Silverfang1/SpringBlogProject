@@ -20,7 +20,7 @@ All the Form Submitted data will be shown here.
     {
 %>
 <form method="post" action="post/view">
-<h2><input style="background: none;border: none;font-size: larger;cursor: pointer" type="submit" value="<%=curBlog.getBlogTitle()%>"></h2>
+<h2><input style="text-align:center;background: none;border: none;font-size: larger;cursor: pointer" type="submit" value="<%=curBlog.getBlogTitle()%>"></h2>
     <input type="hidden" value="<%=curBlog.getId()%>" name="BlogId">
 </form>
 <h3><%=curBlog.getAuthorName()%></h3>
@@ -28,7 +28,7 @@ All the Form Submitted data will be shown here.
 String blogExcrept="";
 if(blog.length()>50)
 {
-   blogExcrept = blog.substring(0,150);
+   blogExcrept = blog.substring(0,49);
 }
 else
 {
