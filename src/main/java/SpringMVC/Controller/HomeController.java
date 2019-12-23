@@ -3,6 +3,7 @@ package SpringMVC.Controller;
 import SpringMVC.Configuration.ApplicationContextConfig;
 import SpringMVC.ServiceLayer.Interface.RetrieveInterface;
 import SpringMVC.ServiceLayer.RetrieveBlog;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,7 +18,8 @@ public class HomeController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public ModelAndView getMyHomePage()
     {
-        RetrieveInterface retrieveBlog = new RetrieveBlog();
+        ApplicationContext applicationContext= new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
+        RetrieveInterface retrieveBlog = applicationContext.getBean(RetrieveBlog.class);
         ModelAndView modelAndView= new ModelAndView();
         modelAndView.addObject("BlogData",retrieveBlog.getBlogData());
         modelAndView.setViewName("index");

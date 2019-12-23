@@ -1,6 +1,7 @@
 package SpringMVC.ServiceLayer;
 
 import SpringMVC.Model.BlogModel;
+import SpringMVC.ServiceLayer.Interface.DeleteBlogInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -8,7 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DeleteBlog implements SpringMVC.ServiceLayer.Interface.DeleteBlog {
+public class DeleteBlog implements DeleteBlogInterface {
     @Override
     public String deleteBlog(int blogId)
     {

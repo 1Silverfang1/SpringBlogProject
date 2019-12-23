@@ -1,6 +1,6 @@
 package SpringMVC.ServiceLayer.Interface;
 
-public interface DeleteBlog {
+public interface DeleteBlogInterface {
      String deleteBlog(int blogId);
 
 }

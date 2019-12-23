@@ -1,9 +1,14 @@
 package SpringMVC.Controller;
 
+import SpringMVC.Configuration.ApplicationContextConfig;
 import SpringMVC.Model.BlogModel;
 import SpringMVC.ServiceLayer.*;
+import SpringMVC.ServiceLayer.Interface.DeleteBlogInterface;
 import SpringMVC.ServiceLayer.Interface.RetrieveInterface;
+import SpringMVC.ServiceLayer.Interface.SaveBlogInterface;
 import SpringMVC.ServiceLayer.Interface.UpdateBlogInterface;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,7 +34,8 @@ public class BlogFormController {
             return modelAndView;
         } else {
             ModelAndView modelAndView = new ModelAndView();
-            PersistBlog PersistBlog = new PersistBlog();
+            ApplicationContext applicationContext= new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
+            SaveBlogInterface PersistBlog = applicationContext.getBean(PersistBlog.class);
             String result = PersistBlog.addThis(blogModel);
             modelAndView.setViewName("blogAdded");
             modelAndView.addObject("processResult",result);
@@ -43,7 +49,8 @@ public class BlogFormController {
         System.out.println(blogId+"sdvvvvvvvv");
         ModelAndView modelAndView= new ModelAndView();
         modelAndView.setViewName("DeleteBlog");
-        RetrieveInterface retrieveSingleBlog = new RetrieveBlog();
+        ApplicationContext applicationContext= new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
+        RetrieveInterface retrieveSingleBlog = applicationContext.getBean(RetrieveBlog.class);
         modelAndView.addObject("BlogObject",retrieveSingleBlog.getMyBlog(Integer.parseInt(blogId)));
         return  modelAndView;
     }
@@ -51,8 +58,8 @@ public class BlogFormController {
     public ModelAndView deletedConfirmBlog(@RequestParam("blogId") String id)
     {
 
-
-        DeleteBlog Blog= new DeleteBlog();
+        ApplicationContext applicationContext= new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
+        DeleteBlogInterface Blog= applicationContext.getBean(DeleteBlog.class);
         Blog.deleteBlog(Integer.parseInt(id));
         ModelAndView modelAndView= new ModelAndView();
         modelAndView.setViewName("dataDeleted");
@@ -63,7 +70,8 @@ public class BlogFormController {
     public ModelAndView updateBlog(@PathVariable("BlogId") String id)
     {
         int blogId = Integer.parseInt(id);
-        RetrieveInterface retrieveSingleBlog = new RetrieveBlog();
+        ApplicationContext applicationContext= new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
+        RetrieveInterface retrieveSingleBlog = applicationContext.getBean(RetrieveBlog.class);
         ModelAndView modelAndView= new ModelAndView();
         modelAndView.addObject("BlogObject",retrieveSingleBlog.getMyBlog(blogId));
 //        System.out.println(request.getParameter("BlogId")+"svd");
@@ -76,9 +84,10 @@ public class BlogFormController {
     {
         System.out.println(blogModel);
         ModelAndView modelAndView= new ModelAndView();
-        UpdateBlogInterface updateBlog= new UpdateBlog();
+        ApplicationContext applicationContext= new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
+        UpdateBlogInterface updateBlog= applicationContext.getBean(UpdateBlog.class);
         updateBlog.updateMyblog(blogModel);
-        RetrieveInterface retrieveBlog= new RetrieveBlog();
+        RetrieveInterface retrieveBlog= applicationContext.getBean(RetrieveBlog.class);
         modelAndView.addObject("BlogData",retrieveBlog.getBlogData());
         modelAndView.setViewName("DataSucess");
         return modelAndView;
@@ -86,8 +95,9 @@ public class BlogFormController {
     @RequestMapping(value = "/view/{BlogId}",method = RequestMethod.GET)
     public ModelAndView showMyblog(@PathVariable("BlogId") String id)
     {
+        ApplicationContext applicationContext= new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
         int blogid = Integer.parseInt(id);
-        RetrieveInterface retrieveSingleBlog= new RetrieveBlog();
+        RetrieveInterface retrieveSingleBlog= applicationContext.getBean(RetrieveBlog.class);
         BlogModel blogModel=retrieveSingleBlog.getMyBlog(blogid);
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.addObject("ViewBlog",blogModel);
