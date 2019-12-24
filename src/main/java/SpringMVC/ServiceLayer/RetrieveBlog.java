@@ -1,5 +1,6 @@
 package SpringMVC.ServiceLayer;
 
+import SpringMVC.Configuration.HibernateConfig;
 import SpringMVC.Model.BlogModel;
 import SpringMVC.ServiceLayer.Interface.RetrieveInterface;
 import org.hibernate.Session;
@@ -7,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,11 +16,21 @@ import java.util.List;
 
 @Component
 public class RetrieveBlog implements RetrieveInterface {
+    @Autowired
+    private HibernateConfig configuration;
+
+    public HibernateConfig getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(HibernateConfig configuration) {
+        this.configuration = configuration;
+    }
    @Override
     public List<BlogModel> getBlogData()
     {
-        Configuration configuration= new Configuration().configure().addAnnotatedClass(BlogModel.class);
-        SessionFactory sessionFactory= configuration.buildSessionFactory();
+
+        SessionFactory sessionFactory= configuration.getSessionFactory();
         Session session= sessionFactory.openSession();
         Transaction transaction= session.beginTransaction();
         Query resultQuery=session.createQuery("from BlogModel");
@@ -29,8 +41,7 @@ public class RetrieveBlog implements RetrieveInterface {
     public BlogModel getMyBlog(int myBlogId)
     {
         BlogModel blogModel= null;
-        Configuration configuration= new Configuration().configure().addAnnotatedClass(BlogModel.class);
-        SessionFactory sessionFactory= configuration.buildSessionFactory();
+        SessionFactory sessionFactory= configuration.getSessionFactory();
         Session session= sessionFactory.openSession();
         Transaction transaction= session.beginTransaction();
         blogModel=session.find(BlogModel.class,myBlogId);
