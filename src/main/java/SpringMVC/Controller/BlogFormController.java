@@ -9,6 +9,7 @@ import SpringMVC.ServiceLayer.Interface.SaveBlogInterface;
 import SpringMVC.ServiceLayer.Interface.UpdateBlogInterface;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,7 @@ public class BlogFormController {
             return modelAndView;
         } else {
             ModelAndView modelAndView = new ModelAndView();
+//            ApplicationContext applicationContext= new ClassPathXmlApplicationContext("Application.xml")
             ApplicationContext applicationContext= new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
             SaveBlogInterface PersistBlog = applicationContext.getBean(PersistBlog.class);
             String result = PersistBlog.addThis(blogModel);
@@ -46,7 +48,7 @@ public class BlogFormController {
     @RequestMapping(value = "/delete/{BlogId}",method = RequestMethod.GET)
     public ModelAndView deletedBlog(@PathVariable("BlogId") String blogId)
     {
-        System.out.println(blogId+"sdvvvvvvvv");
+//        System.out.println(blogId+"sdvvvvvvvv");
         ModelAndView modelAndView= new ModelAndView();
         modelAndView.setViewName("DeleteBlog");
         ApplicationContext applicationContext= new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
